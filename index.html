@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>E-Commerce Store</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f9; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .container { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); width: 350px; }
+        h2 { text-align: center; color: #333; }
+        label { font-weight: bold; margin-top: 10px; display: block; }
+        select, input, button { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+        button { background-color: #28a745; color: white; border: none; cursor: pointer; font-size: 16px; margin-top: 20px; }
+        button:hover { background-color: #218838; }
+        .error { color: red; font-size: 12px; display: none; }
+    </style>
+
+    <script>
+        function validateForm() {
+            let qty = document.getElementById("quantity").value;
+            let errorMsg = document.getElementById("error-msg");
+            
+            if (qty < 1 || qty > 10) {
+                errorMsg.style.display = "block";
+                errorMsg.innerText = "Quantity must be between 1 and 10.";
+                return false; // Stop submission
+            }
+            return true; // Allow submission
+        }
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <h2>🛍️ Quick Buy</h2>
+    <form action="OrderServlet" method="post" onsubmit="return validateForm()">
+        
+        <label>Select Product:</label>
+        <select name="product">
+            <option value="Laptop|55000">Laptop - ₹55,000</option>
+            <option value="SmartWatch|2500">Smart Watch - ₹2,500</option>
+            <option value="Earbuds|1500">Earbuds - ₹1,500</option>
+        </select>
+
+        <label>Quantity:</label>
+        <input type="number" id="quantity" name="quantity" placeholder="Enter Qty" required>
+        <div id="error-msg" class="error"></div>
+
+        <label>Payment Method:</label>
+        <select name="payment">
+            <option value="UPI">UPI</option>
+            <option value="Card">Credit/Debit Card</option>
+            <option value="COD">Cash on Delivery</option>
+        </select>
+
+        <button type="submit">Place Order</button>
+    </form>
+</div>
+
+</body>
+</html>
